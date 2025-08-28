@@ -6,6 +6,12 @@ import Heading from '@/components/Heading.vue'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 
+declare global {
+    interface Window {
+        showToast: (type: 'success' | 'error' | 'info', title?: string, message?: string) => void
+    }
+}
+
 const props = defineProps<{ workOrder: any, products: any[] }>()
 const form = reactive({
   number: props.workOrder.number,
@@ -18,14 +24,23 @@ const form = reactive({
 })
 
 function submit() {
-  router.put(`/work-orders/${props.workOrder.id}`, form)
+  router.put(`/work-orders/${props.workOrder.id}`, form, {
+    onSuccess: () => {
+      window.showToast('success', 'Success', 'Work order updated successfully.')
+      router.visit('/work-orders')
+    },
+    onError: (errors) => {
+      const firstError = Object.values(errors)[0] as string
+      window.showToast('error', 'Error', firstError)
+    },
+  })
 }
 </script>
 
 <template>
   <AppLayout>
     <div class="p-6 space-y-6">
-      <Heading>Edit Work Order</Heading>
+      <Heading title="Edit Work Order"/>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Input v-model="form.number" placeholder="Work Order Number" />
         <select v-model="form.product_id" class="border rounded-md px-3 py-2">
