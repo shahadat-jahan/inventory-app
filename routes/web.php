@@ -1,5 +1,12 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PurchaseOrderController;
+use App\Http\Controllers\SalesOrderController;
+use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\WarehouseController;
+use App\Http\Controllers\WorkOrderController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -12,13 +19,13 @@ Route::get('dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::resource('products', \App\Http\Controllers\ProductController::class);
-    Route::resource('suppliers', \App\Http\Controllers\SupplierController::class);
-    Route::resource('warehouses', \App\Http\Controllers\WarehouseController::class);
-    Route::resource('work-orders', \App\Http\Controllers\WorkOrderController::class);
-    Route::resource('purchase-orders', \App\Http\Controllers\PurchaseOrderController::class);
-    Route::resource('customers', \App\Http\Controllers\CustomerController::class);
-    Route::resource('sales-orders', \App\Http\Controllers\SalesOrderController::class);
+    Route::resource('products', ProductController::class);
+    Route::resource('suppliers', SupplierController::class);
+    Route::resource('warehouses', WarehouseController::class);
+    Route::resource('work-orders', WorkOrderController::class);
+    Route::resource('purchase-orders', PurchaseOrderController::class);
+    Route::resource('customers', CustomerController::class);
+    Route::resource('sales-orders', SalesOrderController::class);
 });
 
 require __DIR__ . '/settings.php';
