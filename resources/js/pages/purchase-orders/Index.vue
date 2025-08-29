@@ -32,12 +32,12 @@ function confirmDelete() {
         router.delete(`/purchase-orders/${itemToDelete.value.id}`, {
             onSuccess: () => {
                 if (window.showToast) {
-                    window.showToast('success', 'Purchase-order deleted successfully');
+                    window.showToast('success', 'Purchase order deleted successfully');
                 }
             },
             onError: () => {
                 if (window.showToast) {
-                    window.showToast('error', 'Failed to delete purchase-order');
+                    window.showToast('error', 'Failed to delete purchase order');
                 }
             },
         });
@@ -93,7 +93,7 @@ function cancelDelete() {
         </div>
 
         <DeleteConfirmModal
-            :item-name="itemToDelete ? itemToDelete.name : ''"
+            :item-name="itemToDelete ? itemToDelete.number : ''"
             :message="`Are you sure you want to delete this purchase order '${itemToDelete?.number || ''}'? This action cannot be undone.`"
             :show="showDeleteModal"
             title="Delete Purchase Order"
