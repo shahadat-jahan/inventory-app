@@ -35,15 +35,15 @@ function showDeleteConfirm(item: any) {
 
 function confirmDelete() {
     if (itemToDelete.value) {
-        router.delete(`/products/${itemToDelete.value.id}`, {
+        router.delete(`/customers/${itemToDelete.value.id}`, {
             onSuccess: () => {
                 if (window.showToast) {
-                    window.showToast('success', 'Product deleted successfully');
+                    window.showToast('success', 'Customer deleted successfully');
                 }
             },
             onError: () => {
                 if (window.showToast) {
-                    window.showToast('error', 'Failed to delete product');
+                    window.showToast('error', 'Failed to delete customer');
                 }
             },
         });
