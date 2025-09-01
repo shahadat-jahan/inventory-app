@@ -63,7 +63,7 @@ function submit() {
                 <Select v-model="form.is_active" :options="statusOptions" placeholder="Select status" />
             </div>
             <div class="flex gap-2">
-                <Button @click="submit">Save</Button>
+                <Button @click="submit">Update</Button>
                 <Button variant="secondary" @click="$inertia.visit('/products')">Cancel</Button>
             </div>
         </div>
